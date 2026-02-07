@@ -391,6 +391,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Anthropic Claude for AI-powered venue enrichment
 - FastAPI and Next.js communities for excellent documentation
 
----
-
-**Built with ❤️ to help friends meet halfway**
