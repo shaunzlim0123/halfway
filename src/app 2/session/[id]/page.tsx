@@ -10,7 +10,7 @@ import SessionStatus from "@/components/SessionStatus";
 const MapPinDrop = dynamic(() => import("@/components/MapPinDrop"), {
   ssr: false,
   loading: () => (
-    <div className="map-wrapper w-full h-[900px] skeleton flex items-center justify-center">
+    <div className="map-wrapper w-full h-[600px] skeleton flex items-center justify-center">
       <div className="meridian-spinner w-8 h-8" />
     </div>
   ),
@@ -19,7 +19,7 @@ const MapPinDrop = dynamic(() => import("@/components/MapPinDrop"), {
 const MapDisplay = dynamic(() => import("@/components/MapDisplay"), {
   ssr: false,
   loading: () => (
-    <div className="map-wrapper w-full h-[900px] skeleton flex items-center justify-center">
+    <div className="map-wrapper w-full h-[600px] skeleton flex items-center justify-center">
       <div className="meridian-spinner w-8 h-8" />
     </div>
   ),

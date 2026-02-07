@@ -1,0 +1,42 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:  # Allows manual triggering from GitHub UI
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to AWS EC2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_USER }}
+          key: ${{ secrets.AWS_SSH_KEY }}
+          port: ${{ secrets.AWS_PORT || 22 }}
+          script: |
+            # Navigate to app directory
+            cd ${{ secrets.APP_PATH }}
+
+            # Pull latest changes
+            git pull origin main
+
+            # Load environment variables (if .env exists)
+            if [ -f .env ]; then
+              export $(cat .env | grep -v '^#' | xargs)
+            fi
+
+            # Build and restart services with Docker Compose
+            docker-compose down
+            docker-compose up -d --build
+
+            # Show status
+            docker-compose ps
+
+            echo "✅ Deployment completed successfully!"

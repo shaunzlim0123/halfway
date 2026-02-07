@@ -1,0 +1,25 @@
+name: Deploy Backend Only
+
+on:
+  workflow_dispatch:  # Manual trigger only
+
+jobs:
+  deploy-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy Backend to AWS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_USER }}
+          key: ${{ secrets.AWS_SSH_KEY }}
+          port: ${{ secrets.AWS_PORT || 22 }}
+          script: |
+            cd ${{ secrets.APP_PATH }}
+            git pull origin main
+            cd backend
+            pip install -r requirements.txt --upgrade
+            cd ..
+            pm2 restart backend
+            echo "✅ Backend deployed!"

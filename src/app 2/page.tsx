@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 const MapPinDrop = dynamic(() => import("@/components/MapPinDrop"), {
   ssr: false,
   loading: () => (
-    <div className="map-wrapper w-full h-[675px] skeleton flex items-center justify-center">
+    <div className="map-wrapper w-full h-[450px] skeleton flex items-center justify-center">
       <div className="meridian-spinner w-8 h-8" />
     </div>
   ),
@@ -82,7 +82,7 @@ export default function HomePage() {
         </div>
 
         <div className="map-wrapper">
-          <MapPinDrop onPinDrop={(lat, lng) => setPin({ lat, lng })} height="675px" />
+          <MapPinDrop onPinDrop={(lat, lng) => setPin({ lat, lng })} />
         </div>
 
         {pin && (

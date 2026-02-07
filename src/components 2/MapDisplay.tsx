@@ -9,7 +9,7 @@ import VenueCard from "./VenueCard";
 
 const containerStyle = {
   width: "100%",
-  height: "900px",
+  height: "600px",
 };
 
 // SVG marker URLs for different colors
@@ -98,14 +98,14 @@ export default function MapDisplay({
 
   if (!isLoaded) {
     return (
-      <div className="w-full h-[900px] rounded-lg skeleton flex items-center justify-center">
+      <div className="w-full h-[600px] rounded-lg skeleton flex items-center justify-center">
         <div className="meridian-spinner w-8 h-8" />
       </div>
     );
   }
 
   return (
-    <div className="w-full h-[900px] rounded-lg overflow-hidden">
+    <div className="w-full h-[600px] rounded-lg overflow-hidden">
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={mapCenter}

@@ -1,0 +1,24 @@
+name: Deploy Frontend Only
+
+on:
+  workflow_dispatch:  # Manual trigger only
+
+jobs:
+  deploy-frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy Frontend to AWS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_USER }}
+          key: ${{ secrets.AWS_SSH_KEY }}
+          port: ${{ secrets.AWS_PORT || 22 }}
+          script: |
+            cd ${{ secrets.APP_PATH }}
+            git pull origin main
+            npm install
+            npm run build
+            pm2 restart frontend
+            echo "✅ Frontend deployed!"
